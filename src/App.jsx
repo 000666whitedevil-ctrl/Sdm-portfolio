@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import {
-  ArrowDown, ArrowRight, ArrowUpRight, Asterisk, BookOpen,
-  BriefcaseBusiness, Github, GraduationCap, Linkedin, Mail,
-  Menu, MoveUpRight, X, Code2, Lightbulb, Sparkles
+  ArrowDown, ArrowUpRight, Asterisk, BookOpen,
+  Github, GraduationCap, Linkedin, Mail,
+  Menu, X, Code2, Lightbulb, Sparkles
 } from 'lucide-react';
 
 const navItems = [
@@ -45,21 +45,19 @@ const projects = [
 ];
 
 function Reveal({ children, className = '', delay = 0 }) {
-  const [visible, setVisible] = useState(false);
+  const [element, setElement] = useState(null);
   useEffect(() => {
-    const node = document.querySelectorAll('[data-reveal]');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
     }, { threshold: 0.12 });
-    node.forEach((el) => observer.observe(el));
+    observer.observe(element);
     return () => observer.disconnect();
-  }, []);
-  return <div data-reveal style={{ '--reveal-delay': `${delay}ms` }} className={className}>{children}</div>;
+  }, [element]);
+  return <div ref={setElement} data-reveal style={{ '--reveal-delay': `${delay}ms` }} className={className}>{children}</div>;
 }
 
 function Header() {
