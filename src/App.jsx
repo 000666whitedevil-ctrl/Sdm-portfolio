@@ -1,121 +1,16 @@
-import { useState } from 'react';
-import { ArrowDown, ArrowUpRight, Menu, X, Sparkles } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowLeft, ArrowUpRight, ArrowDown, X, Menu, Compass, BookOpen, Users, GraduationCap, Lightbulb, MoveUpRight } from 'lucide-react';
 
-const worlds = [
-  { number: '01', name: 'The Soul', note: 'The person beyond the ambition', mark: '01 / HUMAN' },
-  { number: '02', name: 'The Scholar', note: 'Mathematics, questions and research', mark: '02 / INQUIRY' },
-  { number: '03', name: 'The Leader', note: 'People, projects and collective action', mark: '03 / IMPACT' },
-  { number: '04', name: 'The Educator', note: 'Learning that moves in both directions', mark: '04 / LEARNING' },
-  { number: '05', name: 'The Visionary', note: 'Ideas taking shape, one step at a time', mark: '05 / POSSIBILITY' },
+const worlds=[
+{id:'soul',n:'01',title:'The Soul',sub:'The person beyond the pursuit',tag:'HUMAN / INNER WORLD',icon:Compass,intro:'Before the work, there is a person.',body:'A work in progress. Curious by nature, reflective by instinct, and interested in the small experiences that shape how we see the world.',facts:[['BASED IN','New Delhi, India'],['GUIDING IDEA','Stay curious. Stay grounded.'],['PERSONAL NOTE','An open-ended story, not a finished identity.']]},
+{id:'scholar',n:'02',title:'The Scholar',sub:'Mathematics, questions and research',tag:'INQUIRY / MATHEMATICS',icon:BookOpen,intro:'I find beauty in the language of mathematics.',body:'My academic foundation is in B.Sc. (Hons.) Mathematics at Zakir Husain Delhi College, University of Delhi. My interests extend towards mathematical modelling, fractional calculus and the questions that connect theory with physical systems.',facts:[['ACADEMIC FOUNDATION','B.Sc. (Hons.) Mathematics — University of Delhi'],['RESEARCH TOPIC','A Study of Heat Transfer in Ice Cream Cooling System Using Atangana–Baleanu Operators'],['AREAS OF INTEREST','Fractional calculus · Heat-transfer modelling · Higher education']]},
+{id:'leader',n:'03',title:'The Leader',sub:'People, projects and collective action',tag:'IMPACT / COMMUNITY',icon:Users,intro:'Impact is built with people, never in isolation.',body:'My work with Nivedan Foundation has brought me closer to community initiatives and the discipline of turning intent into coordinated action. The projects below represent areas of involvement; their impact belongs to the people who make them happen.',facts:[['ORGANISATION','Nivedan Foundation'],['PROJECT ASTITVA','Women empowerment'],['PROJECT TEJAS','Technology and education'],['DIGITAL DIKSHA','Digital literacy'],['PANCHTATVA','Sustainability and awareness']]},
+{id:'educator',n:'04',title:'The Educator',sub:'Learning that moves in both directions',tag:'LEARNING / TEACHING',icon:GraduationCap,intro:'Education is not the transfer of answers. It is the opening of possibilities.',body:'I am drawn to teaching because it asks for clarity, patience and empathy at once. My interests sit at the intersection of mathematics, accessible learning and the confidence that grows when a concept finally makes sense.',facts:[['TEACHING LENS','Clarity before complexity'],['SUBJECT INTEREST','Mathematics'],['BELIEF','Every learner deserves to feel capable of asking better questions.']]},
+{id:'visionary',n:'05',title:'The Visionary',sub:'Ideas taking shape, one step at a time',tag:'POSSIBILITY / FUTURE',icon:Lightbulb,intro:'The next chapter is still being designed.',body:'I am interested in building useful things at the intersection of technology, education and human needs. I believe ambition should be matched with experimentation, honest feedback and the patience to make an idea real.',facts:[['EXPLORING','Technology-led ventures'],['LONG VIEW','Research, education and meaningful innovation'],['WORKING PRINCIPLE','Start small. Learn quickly. Build with intent.']]}
 ];
-
-function Header() {
-  const [open, setOpen] = useState(false);
-  return (
-    <header className="site-header">
-      <a className="wordmark" href="#top" aria-label="Shiv Dutt Mishra home">S<span>M</span><i>.</i></a>
-      <button className="menu-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle navigation">
-        {open ? <X /> : <Menu />}
-      </button>
-      <nav className={open ? 'nav-links nav-open' : 'nav-links'} aria-label="Main navigation">
-        <a href="#top" onClick={() => setOpen(false)}>Home</a>
-        <a href="#intro" onClick={() => setOpen(false)}>About</a>
-        <a href="#journey" onClick={() => setOpen(false)}>My journey</a>
-        <a href="#contact" onClick={() => setOpen(false)}>Contact</a>
-      </nav>
-      <a className="header-contact" href="mailto:sdmishra1000@gmail.com">LET'S CONNECT <ArrowUpRight size={14} /></a>
-    </header>
-  );
-}
-
-function App() {
-  return (
-    <div id="top" className="portfolio">
-      <div className="ambient-glow" aria-hidden="true" />
-      <div className="grain" aria-hidden="true" />
-      <Header />
-      <main>
-        <section className="hero">
-          <div className="hero-kicker"><span className="live-dot" /> A PERSONAL JOURNEY IN FIVE DIMENSIONS <span className="kicker-line" /> NEW DELHI, INDIA</div>
-          <div className="hero-layout">
-            <div className="hero-copy">
-              <p className="eyebrow">MATHEMATICS <b>·</b> RESEARCH <b>·</b> HUMAN IMPACT</p>
-              <h1>Shiv Dutt<br /><em>Mishra.</em></h1>
-              <p className="hero-statement">A curious mind, shaped by mathematics, drawn to people, and always becoming.</p>
-              <p className="hero-description">I’m exploring the connections between analytical thinking, meaningful education, research and ideas that can make a difference.</p>
-              <div className="hero-actions">
-                <a className="primary-link" href="#journey">EXPLORE MY JOURNEY <ArrowUpRight size={16} /></a>
-                <a className="secondary-link" href="#intro">A LITTLE ABOUT ME <ArrowDown size={14} /></a>
-              </div>
-            </div>
-            <div className="hero-portrait">
-              <div className="portrait-arch">
-                <div className="portrait-image-wrap">
-                  <img className="portrait-image" src="/assets/hero-portrait.webp" alt="Portrait of Shiv Dutt Mishra" onError={(event) => { event.currentTarget.style.display = 'none'; }} />
-                  <div className="portrait-fallback">
-                    <span className="fallback-initials">S<span>.</span>M</span>
-                    <span className="fallback-caption">THE PERSON BEHIND THE IDEAS</span>
-                  </div>
-                </div>
-                <span className="portrait-index">FIG. 01 <i>—</i> SHIV DUTT MISHRA</span>
-              </div>
-              <div className="portrait-orbit orbit-a" />
-              <div className="portrait-orbit orbit-b" />
-              <div className="portrait-seal"><Sparkles size={17} /><span>CURIOUS<br />BY NATURE</span></div>
-            </div>
-          </div>
-          <div className="hero-foot">
-            <span>SCROLL TO DISCOVER</span><span className="scroll-track"><i /></span><span>01 <b>/</b> 05</span>
-          </div>
-        </section>
-
-        <section className="intro-section" id="intro">
-          <div className="section-label"><span>01</span> A NOTE ABOUT ME</div>
-          <div className="intro-content">
-            <h2>Not one title.<br /><em>Many dimensions.</em></h2>
-            <div className="intro-copy">
-              <p className="intro-lead">I’m interested in what happens when curiosity meets purpose.</p>
-              <p>My academic foundation is in mathematics. Alongside it, I’ve found myself drawn to research, education, community initiatives and the possibilities of technology. This space brings those threads together—not as a finished story, but as a record of a journey still unfolding.</p>
-              <a className="inline-link" href="#journey">DISCOVER THE FIVE WORLDS <ArrowUpRight size={15} /></a>
-            </div>
-          </div>
-        </section>
-
-        <section className="worlds-section" id="journey">
-          <div className="worlds-heading">
-            <div><div className="section-label"><span>02</span> THE JOURNEY</div><h2>Five worlds.<br /><em>One evolving story.</em></h2></div>
-            <p>Every person contains more than one story. Explore the dimensions that continue to shape mine.</p>
-          </div>
-          <div className="world-list">
-            {worlds.map((world) => (
-              <div className="world-row" key={world.number}>
-                <span className="world-number">{world.number}</span>
-                <div className="world-name"><h3>{world.name}</h3><p>{world.note}</p></div>
-                <span className="world-mark">{world.mark}</span>
-                <span className="world-arrow"><ArrowUpRight size={19} /></span>
-              </div>
-            ))}
-          </div>
-          <p className="worlds-note">THE DOORS OPEN IN THE NEXT CHAPTER <span>✳</span></p>
-        </section>
-
-        <section className="contact-section" id="contact">
-          <div className="section-label"><span>03</span> THE NEXT CHAPTER</div>
-          <h2>Let's make<br /><em>something matter.</em></h2>
-          <div className="contact-bottom">
-            <p>For thoughtful conversations, collaborations and opportunities.</p>
-            <a className="primary-link" href="mailto:sdmishra1000@gmail.com">GET IN TOUCH <ArrowUpRight size={16} /></a>
-          </div>
-          <div className="social-links">
-            <a href="https://www.linkedin.com/in/shiv-dutt-mishra-8b5315372" target="_blank" rel="noreferrer">LINKEDIN <ArrowUpRight size={13} /></a>
-            <a href="https://github.com/000666whitedevil-ctrl" target="_blank" rel="noreferrer">GITHUB <ArrowUpRight size={13} /></a>
-            <a href="mailto:sdmishra1000@gmail.com">EMAIL <ArrowUpRight size={13} /></a>
-          </div>
-        </section>
-      </main>
-      <footer className="footer"><a className="wordmark" href="#top">S<span>M</span><i>.</i></a><span>AN OPEN-ENDED STORY · NEW DELHI, INDIA</span><span>© 2026 SHIV DUTT MISHRA</span></footer>
-    </div>
-  );
-}
-
-export default App;
+function Header({home,explore}){const[open,setOpen]=useState(false);return <header className="topbar"><button className="brand" onClick={home}>S<span>D</span>M<i>.</i></button><div className="topbar-center"><i/> AN OPEN-ENDED STORY <b>·</b> NEW DELHI, INDIA</div><button className="nav-cta" onClick={explore}>ENTER THE WORLDS <ArrowUpRight size={14}/></button><button className="mobile-menu" onClick={()=>setOpen(!open)} aria-label="Toggle menu">{open?<X/>:<Menu/>}</button>{open&&<nav className="mobile-nav"><button onClick={()=>{home();setOpen(false)}}>HOME</button><button onClick={()=>{explore();setOpen(false)}}>EXPLORE THE WORLDS</button><a href="mailto:sdmishra1000@gmail.com">CONTACT</a></nav>}</header>}
+function Hero({explore}){return <section className="hero-scene"><div className="hero-grid"/><div className="hero-copy"><div className="micro-label"><span>01 — A PERSONAL UNIVERSE</span><span>SCROLL TO BEGIN</span></div><p className="hero-pretitle">MATHEMATICS <i>×</i> PEOPLE <i>×</i> POSSIBILITY</p><h1>Shiv Dutt<br/><em>Mishra.</em></h1><p className="hero-line">One life. Many dimensions.<br/><span>One story still unfolding.</span></p><button className="enter-link" onClick={explore}>STEP INSIDE <b><ArrowUpRight size={18}/></b></button></div><div className="hero-art"><div className="hero-portrait-frame"><img src="/assets/hero-portrait.webp" alt="Portrait of Shiv Dutt Mishra" onError={e=>e.currentTarget.style.display='none'}/><div className="portrait-placeholder"><span>SDM</span><small>THE PERSON BEHIND THE IDEAS</small></div></div><div className="frame-caption"><span>FIG. 01</span><span>SHIV DUTT MISHRA</span><span>2026</span></div><div className="orbit orbit-one"/><div className="orbit orbit-two"/><div className="orbit-point"/></div><div className="hero-bottom"><span>AN EXPLORATION OF IDENTITY & INTENT</span><span className="scroll-indicator"><i/></span><span>01 / 05</span></div><div className="vertical-note">IN CONSTANT BECOMING</div></section>}
+function Hallway({select}){return <section className="hallway-section" id="worlds"><div className="hallway-heading"><div><span className="section-index">02 / THE PASSAGE</span><h2>Choose a<br/><em>doorway.</em></h2></div><p>There is more than one way to know a person.<br/>Choose where you would like to begin.</p></div><div className="hallway-stage"><div className="hallway-ceiling"/><div className="hallway-floor"/><div className="hallway-vanish"/><div className="doors">{worlds.map((w,i)=>{const Icon=w.icon;return <button key={w.id} className={'door door-'+(i+1)} onClick={()=>select(w.id)} aria-label={'Enter '+w.title}><span className="door-number">{w.n}</span><span className="door-frame"><span className="door-panel"><span className="door-glyph"><Icon size={28} strokeWidth={1}/></span><span className="door-name">{w.title}</span><span className="door-sub">{w.sub}</span><span className="door-handle"/></span></span><span className="door-enter">OPEN WORLD <ArrowUpRight size={12}/></span></button>})}</div><div className="hallway-caption"><span>FIVE DIMENSIONS</span><span>ONE EVOLVING STORY</span></div></div></section>}
+function World({world,close,select}){if(!world)return null;const Icon=world.icon;return <div className="world-experience" role="dialog" aria-modal="true" aria-label={world.title}><div className="world-backdrop"/><div className="world-top"><button className="back-button" onClick={close}><ArrowLeft size={16}/> BACK TO THE HALLWAY</button><span>{world.tag}</span><button className="close-world" onClick={close} aria-label="Close"><X/></button></div><div className="world-content"><div className="world-visual"><div className="world-visual-ring"/><div className="world-visual-inner"><Icon size={66} strokeWidth={.8}/></div><span className="world-visual-index">{world.n} / 05</span><span className="world-visual-word">{world.title.toUpperCase()}</span></div><div className="world-text"><span className="section-index">A CLOSER LOOK / {world.n}</span><h2>{world.intro}</h2><p>{world.body}</p><div className="world-facts">{world.facts.map(([a,b])=><div className="fact" key={a}><span>{a}</span><p>{b}</p></div>)}</div></div></div><div className="world-bottom"><span>THE STORY CONTINUES</span><div className="world-switch">{worlds.map(w=><button key={w.id} className={w.id===world.id?'active':''} onClick={()=>select(w.id)}>{w.n}</button>)}</div><button className="next-world" onClick={()=>select(worlds[(worlds.findIndex(w=>w.id===world.id)+1)%worlds.length].id)}>NEXT WORLD <ArrowUpRight size={14}/></button></div></div>}
+function Contact({home}){return <section className="contact-scene"><span className="section-index">03 / THE NEXT CHAPTER</span><h2>Good things begin<br/><em>with a conversation.</em></h2><p>For thoughtful conversations, collaborations and opportunities.</p><a className="contact-button" href="mailto:sdmishra1000@gmail.com">SAY HELLO <ArrowUpRight size={16}/></a><div className="contact-social"><a href="https://www.linkedin.com/in/shiv-dutt-mishra-8b5315372" target="_blank" rel="noreferrer">LINKEDIN <MoveUpRight size={12}/></a><a href="https://github.com/000666whitedevil-ctrl" target="_blank" rel="noreferrer">GITHUB <MoveUpRight size={12}/></a><a href="mailto:sdmishra1000@gmail.com">EMAIL <MoveUpRight size={12}/></a></div><button className="back-top" onClick={home}><ArrowUpRight size={14}/> BACK TO THE BEGINNING</button></section>}
+export default function App(){const[active,setActive]=useState(null);const world=worlds.find(w=>w.id===active);useEffect(()=>{document.body.classList.toggle('world-open',!!active);return()=>document.body.classList.remove('world-open')},[active]);useEffect(()=>{const fn=e=>{if(e.key==='Escape')setActive(null)};window.addEventListener('keydown',fn);return()=>window.removeEventListener('keydown',fn)},[]);const explore=()=>document.getElementById('worlds')?.scrollIntoView({behavior:'smooth'});const home=()=>{setActive(null);window.scrollTo({top:0,behavior:'smooth'})};return <main className="portfolio-shell"><div className="grain-layer"/><Header home={home} explore={explore}/><Hero explore={explore}/><Hallway select={setActive}/><Contact home={home}/><footer className="site-footer"><button className="brand" onClick={home}>S<span>D</span>M<i>.</i></button><span>AN OPEN-ENDED STORY · NEW DELHI, INDIA</span><span>© 2026 SHIV DUTT MISHRA</span></footer><World world={world} close={()=>setActive(null)} select={setActive}/></main>}
