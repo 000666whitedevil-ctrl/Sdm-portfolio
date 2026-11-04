@@ -9,9 +9,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      html,body{margin:0;min-height:100%;background:#11110f;color:#eeece6;font-family:Arial,sans-serif}
+      #boot-fallback{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,8vw,100px);box-sizing:border-box;background:radial-gradient(ellipse at 80% 35%,#28211c 0,#11110f 58%)}
+      #boot-fallback .kicker{font:11px monospace;letter-spacing:.18em;color:#f07845}
+      #boot-fallback h1{font-size:clamp(48px,10vw,100px);line-height:.98;letter-spacing:-.06em;max-width:850px;margin:26px 0}
+      #boot-fallback p{color:#aaa89f;line-height:1.8;max-width:540px}
+      #boot-fallback a{color:#f07845;text-decoration:none;border-bottom:1px solid #f07845;padding-bottom:8px;width:max-content;margin-top:20px;font:12px monospace;letter-spacing:.1em}
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main id="boot-fallback" role="status">
+        <span class="kicker">SHIV DUTT MISHRA · NEW DELHI, INDIA</span>
+        <h1>Curious mind.<br><em>Intentional</em> work.</h1>
+        <p>Mathematics, education, research and technology — brought together by a curiosity for ideas that make a difference.</p>
+        <a href="mailto:sdmishra1000@gmail.com">GET IN TOUCH ↗</a>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
