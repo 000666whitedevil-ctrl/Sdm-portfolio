@@ -1,207 +1,119 @@
-import { useEffect, useState } from 'react';
-import {
-  ArrowDown, ArrowUpRight, Asterisk, BookOpen,
-  Github, GraduationCap, Linkedin, Mail,
-  Menu, X, Code2, Lightbulb, Sparkles
-} from 'lucide-react';
+import { useState } from 'react';
+import { ArrowDown, ArrowUpRight, Menu, X, Sparkles } from 'lucide-react';
 
-const navItems = [
-  ['01', 'About', '#about'],
-  ['02', 'Focus', '#focus'],
-  ['03', 'Work', '#work'],
-  ['04', 'Journey', '#journey'],
-  ['05', 'Contact', '#contact'],
+const worlds = [
+  { number: '01', name: 'The Soul', note: 'The person beyond the ambition', mark: '01 / HUMAN' },
+  { number: '02', name: 'The Scholar', note: 'Mathematics, questions and research', mark: '02 / INQUIRY' },
+  { number: '03', name: 'The Leader', note: 'People, projects and collective action', mark: '03 / IMPACT' },
+  { number: '04', name: 'The Educator', note: 'Learning that moves in both directions', mark: '04 / LEARNING' },
+  { number: '05', name: 'The Visionary', note: 'Ideas taking shape, one step at a time', mark: '05 / POSSIBILITY' },
 ];
-
-const projects = [
-  {
-    number: '01',
-    type: 'COMMUNITY · EDUCATION',
-    title: 'Project Tejas',
-    description: 'A learning initiative focused on making quality education and technology more accessible to underserved children.',
-    tag: 'Education',
-  },
-  {
-    number: '02',
-    type: 'DIGITAL EMPOWERMENT',
-    title: 'Digital Diksha',
-    description: 'A digital-literacy initiative helping people build confidence with essential digital tools and everyday technology.',
-    tag: 'Technology',
-  },
-  {
-    number: '03',
-    type: 'COMMUNITY · SUSTAINABILITY',
-    title: 'Project Panchtatva',
-    description: 'Awareness and action around sustainability, environmental responsibility and the five elements of nature.',
-    tag: 'Impact',
-  },
-  {
-    number: '04',
-    type: 'WOMEN EMPOWERMENT',
-    title: 'Project Astitva',
-    description: 'An initiative creating space for conversations around identity, agency and women’s empowerment.',
-    tag: 'People',
-  },
-];
-
-function Reveal({ children, className = '', delay = 0 }) {
-  const [element, setElement] = useState(null);
-  useEffect(() => {
-    if (!element) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    }, { threshold: 0.12 });
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [element]);
-  return <div ref={setElement} data-reveal style={{ '--reveal-delay': `${delay}ms` }} className={className}>{children}</div>;
-}
 
 function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="site-header">
-      <a className="wordmark" href="#top" aria-label="Shiv Dutt Mishra home">SDM<span>®</span></a>
-      <nav className={open ? 'nav-links nav-open' : 'nav-links'}>
-        {navItems.map(([n, label, href]) => (
-          <a key={n} href={href} onClick={() => setOpen(false)}><small>{n}</small>{label}</a>
-        ))}
-      </nav>
-      <a className="header-cta" href="#contact">LET’S TALK <ArrowUpRight size={14} /></a>
-      <button className="menu-toggle" onClick={() => setOpen(!open)} aria-label="Toggle navigation">
+      <a className="wordmark" href="#top" aria-label="Shiv Dutt Mishra home">S<span>M</span><i>.</i></a>
+      <button className="menu-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle navigation">
         {open ? <X /> : <Menu />}
       </button>
+      <nav className={open ? 'nav-links nav-open' : 'nav-links'} aria-label="Main navigation">
+        <a href="#top" onClick={() => setOpen(false)}>Home</a>
+        <a href="#intro" onClick={() => setOpen(false)}>About</a>
+        <a href="#journey" onClick={() => setOpen(false)}>My journey</a>
+        <a href="#contact" onClick={() => setOpen(false)}>Contact</a>
+      </nav>
+      <a className="header-contact" href="mailto:sdmishra1000@gmail.com">LET'S CONNECT <ArrowUpRight size={14} /></a>
     </header>
   );
 }
 
 function App() {
-  useEffect(() => {
-    const onScroll = () => document.documentElement.style.setProperty('--scroll', window.scrollY);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
-    <div id="top" className="app-shell">
-      <div className="grain" />
+    <div id="top" className="portfolio">
+      <div className="ambient-glow" aria-hidden="true" />
+      <div className="grain" aria-hidden="true" />
       <Header />
-
       <main>
-        <section className="hero section-wrap">
-          <div className="hero-meta">
-            <span><i className="status-dot" /> AVAILABLE FOR MEANINGFUL WORK</span>
-            <span>NEW DELHI, INDIA · 2026</span>
-          </div>
-          <div className="hero-grid">
+        <section className="hero">
+          <div className="hero-kicker"><span className="live-dot" /> A PERSONAL JOURNEY IN FIVE DIMENSIONS <span className="kicker-line" /> NEW DELHI, INDIA</div>
+          <div className="hero-layout">
             <div className="hero-copy">
-              <Reveal>
-                <p className="eyebrow"><span className="eyebrow-line" /> MATHEMATICS · EDUCATION · TECHNOLOGY</p>
-                <h1>Curious mind.<br /><em>Intentional</em> work<span className="orange-dot">.</span></h1>
-                <p className="hero-description">I’m Shiv Dutt Mishra — exploring the space where analytical thinking, meaningful education and human-centred ideas meet.</p>
-                <div className="hero-actions">
-                  <a className="button button-primary" href="#work">EXPLORE MY WORK <ArrowUpRight size={16} /></a>
-                  <a className="text-link" href="#about">A LITTLE ABOUT ME <ArrowDown size={15} /></a>
+              <p className="eyebrow">MATHEMATICS <b>·</b> RESEARCH <b>·</b> HUMAN IMPACT</p>
+              <h1>Shiv Dutt<br /><em>Mishra.</em></h1>
+              <p className="hero-statement">A curious mind, shaped by mathematics, drawn to people, and always becoming.</p>
+              <p className="hero-description">I’m exploring the connections between analytical thinking, meaningful education, research and ideas that can make a difference.</p>
+              <div className="hero-actions">
+                <a className="primary-link" href="#journey">EXPLORE MY JOURNEY <ArrowUpRight size={16} /></a>
+                <a className="secondary-link" href="#intro">A LITTLE ABOUT ME <ArrowDown size={14} /></a>
+              </div>
+            </div>
+            <div className="hero-portrait">
+              <div className="portrait-arch">
+                <div className="portrait-image-wrap">
+                  <img className="portrait-image" src="/assets/hero-portrait.webp" alt="Portrait of Shiv Dutt Mishra" onError={(event) => { event.currentTarget.style.display = 'none'; }} />
+                  <div className="portrait-fallback">
+                    <span className="fallback-initials">S<span>.</span>M</span>
+                    <span className="fallback-caption">THE PERSON BEHIND THE IDEAS</span>
+                  </div>
                 </div>
-              </Reveal>
+                <span className="portrait-index">FIG. 01 <i>—</i> SHIV DUTT MISHRA</span>
+              </div>
+              <div className="portrait-orbit orbit-a" />
+              <div className="portrait-orbit orbit-b" />
+              <div className="portrait-seal"><Sparkles size={17} /><span>CURIOUS<br />BY NATURE</span></div>
             </div>
-            <Reveal className="hero-visual" delay={120}>
-              <div className="portrait-frame">
-                <div className="portrait-orbit orbit-one" />
-                <div className="portrait-orbit orbit-two" />
-                <div className="portrait-placeholder">
-                  <span className="portrait-monogram">S<span>.</span></span>
-                  <span className="portrait-caption">PORTRAIT / 001</span>
-                  <span className="portrait-note">A photograph<br />will live here.</span>
-                </div>
-                <div className="portrait-stamp"><Asterisk size={22} /><span>THINK<br />DEEPLY</span></div>
-              </div>
-              <span className="visual-index">FIG. 01 — THE PERSON BEHIND THE IDEAS</span>
-            </Reveal>
           </div>
-          <div className="hero-bottom">
-            <span>SCROLL TO DISCOVER</span><div className="scroll-line"><span /></div><span>01 / 05</span>
+          <div className="hero-foot">
+            <span>SCROLL TO DISCOVER</span><span className="scroll-track"><i /></span><span>01 <b>/</b> 05</span>
           </div>
         </section>
 
-        <section id="about" className="about section-wrap section-pad">
-          <Reveal><p className="eyebrow"><span className="eyebrow-line" /> 01 — THE PERSON</p></Reveal>
-          <div className="about-grid">
-            <Reveal className="about-image-wrap">
-              <div className="about-image">
-                <div className="hands-mark"><span>HANDS</span><Asterisk size={34} /><span>IN MOTION</span></div>
-                <p>AN IMAGE THAT<br />SAYS MORE THAN WORDS.</p>
-              </div>
-              <span className="image-caption">A STUDY IN CURIOSITY · 2026</span>
-            </Reveal>
-            <Reveal className="about-copy" delay={100}>
-              <h2>More than a<br /><em>single discipline.</em></h2>
-              <p className="large-copy">I like understanding how things work — and finding ways to make that understanding useful to people.</p>
-              <p>My foundation is in mathematics, but my interests reach into education, research, technology and community-building. I’m drawn to ideas that solve real problems, make knowledge more accessible and create room for people to grow.</p>
-              <a href="#journey" className="underlined-link">GET TO KNOW MY JOURNEY <ArrowUpRight size={15} /></a>
-            </Reveal>
-          </div>
-        </section>
-
-        <section id="focus" className="focus-section section-pad">
-          <div className="section-wrap">
-            <Reveal><div className="section-heading"><p className="eyebrow"><span className="eyebrow-line" /> 02 — AREAS OF FOCUS</p><span className="heading-aside">WHAT KEEPS ME EXPLORING</span></div></Reveal>
-            <Reveal><h2 className="section-title">Different lenses.<br /><em>One curious mind.</em></h2></Reveal>
-            <div className="focus-grid">
-              <Reveal className="focus-card"><span className="card-number">01 / THINK</span><div className="focus-icon"><BookOpen /></div><h3>Mathematics<br />& Research</h3><p>Finding structure in complexity, asking better questions and learning to think with precision.</p><span className="card-arrow"><ArrowUpRight /></span></Reveal>
-              <Reveal className="focus-card" delay={80}><span className="card-number">02 / TEACH</span><div className="focus-icon"><GraduationCap /></div><h3>Education<br />& Learning</h3><p>Making ideas understandable, creating better learning experiences and widening access to knowledge.</p><span className="card-arrow"><ArrowUpRight /></span></Reveal>
-              <Reveal className="focus-card" delay={160}><span className="card-number">03 / BUILD</span><div className="focus-icon"><Code2 /></div><h3>Technology<br />& Ideas</h3><p>Exploring digital tools and building practical platforms around real human needs.</p><span className="card-arrow"><ArrowUpRight /></span></Reveal>
-              <Reveal className="focus-card" delay={240}><span className="card-number">04 / CONTRIBUTE</span><div className="focus-icon"><Lightbulb /></div><h3>Community<br />& Impact</h3><p>Working with people, turning intent into action and contributing to initiatives that matter.</p><span className="card-arrow"><ArrowUpRight /></span></Reveal>
+        <section className="intro-section" id="intro">
+          <div className="section-label"><span>01</span> A NOTE ABOUT ME</div>
+          <div className="intro-content">
+            <h2>Not one title.<br /><em>Many dimensions.</em></h2>
+            <div className="intro-copy">
+              <p className="intro-lead">I’m interested in what happens when curiosity meets purpose.</p>
+              <p>My academic foundation is in mathematics. Alongside it, I’ve found myself drawn to research, education, community initiatives and the possibilities of technology. This space brings those threads together—not as a finished story, but as a record of a journey still unfolding.</p>
+              <a className="inline-link" href="#journey">DISCOVER THE FIVE WORLDS <ArrowUpRight size={15} /></a>
             </div>
           </div>
         </section>
 
-        <section id="work" className="work section-wrap section-pad">
-          <Reveal><div className="section-heading"><p className="eyebrow"><span className="eyebrow-line" /> 03 — SELECTED WORK</p><span className="heading-aside">IDEAS INTO ACTION</span></div></Reveal>
-          <div className="work-intro"><Reveal><h2 className="section-title">Work with<br /><em>purpose.</em></h2></Reveal><Reveal><p className="work-intro-copy">A selection of initiatives connected by a simple belief: thoughtful work should create value beyond itself.</p></Reveal></div>
-          <div className="project-list">
-            {projects.map((project) => <Reveal key={project.number} className="project-row">
-              <span className="project-number">{project.number}</span>
-              <div className="project-main"><span className="project-type">{project.type}</span><h3>{project.title}</h3><p>{project.description}</p></div>
-              <span className="project-tag">{project.tag}</span><span className="project-arrow"><ArrowUpRight /></span>
-            </Reveal>)}
+        <section className="worlds-section" id="journey">
+          <div className="worlds-heading">
+            <div><div className="section-label"><span>02</span> THE JOURNEY</div><h2>Five worlds.<br /><em>One evolving story.</em></h2></div>
+            <p>Every person contains more than one story. Explore the dimensions that continue to shape mine.</p>
           </div>
-          <p className="work-footnote"><Sparkles size={14} /> MORE COLLABORATIONS AND INDEPENDENT EXPLORATIONS IN PROGRESS.</p>
-        </section>
-
-        <section id="journey" className="journey section-pad">
-          <div className="section-wrap">
-            <Reveal><p className="eyebrow"><span className="eyebrow-line" /> 04 — THE JOURNEY</p></Reveal>
-            <div className="journey-grid">
-              <Reveal><h2 className="section-title">Always<br /><em>becoming.</em></h2><p className="journey-lead">A path shaped by learning, service and the willingness to begin again.</p></Reveal>
-              <div className="timeline">
-                <Reveal className="timeline-item"><span className="timeline-year">ACADEMICS</span><div><h3>University of Delhi</h3><p>Mathematics · B.Sc. (Hons.)</p><small>Building a rigorous foundation in mathematical thinking.</small></div></Reveal>
-                <Reveal className="timeline-item"><span className="timeline-year">COMMUNITY</span><div><h3>Nivedan Foundation</h3><p>Core Team · Technology & Projects</p><small>Contributing to education, digital literacy and community initiatives.</small></div></Reveal>
-                <Reveal className="timeline-item"><span className="timeline-year">ONGOING</span><div><h3>Research & Exploration</h3><p>Mathematics · Learning · Technology</p><small>Connecting ideas across disciplines and turning curiosity into work.</small></div></Reveal>
+          <div className="world-list">
+            {worlds.map((world) => (
+              <div className="world-row" key={world.number}>
+                <span className="world-number">{world.number}</span>
+                <div className="world-name"><h3>{world.name}</h3><p>{world.note}</p></div>
+                <span className="world-mark">{world.mark}</span>
+                <span className="world-arrow"><ArrowUpRight size={19} /></span>
               </div>
-            </div>
+            ))}
           </div>
+          <p className="worlds-note">THE DOORS OPEN IN THE NEXT CHAPTER <span>✳</span></p>
         </section>
 
-        <section id="contact" className="contact section-wrap section-pad">
-          <Reveal><p className="eyebrow"><span className="eyebrow-line" /> 05 — START A CONVERSATION</p></Reveal>
-          <Reveal><h2>Good things begin<br />with <em>a hello.</em></h2></Reveal>
+        <section className="contact-section" id="contact">
+          <div className="section-label"><span>03</span> THE NEXT CHAPTER</div>
+          <h2>Let's make<br /><em>something matter.</em></h2>
           <div className="contact-bottom">
-            <p>Have an idea, an opportunity or a question worth exploring?<br />I’d be glad to hear from you.</p>
-            <a className="contact-mail" href="mailto:hello@example.com">LET’S CONNECT <ArrowUpRight /></a>
+            <p>For thoughtful conversations, collaborations and opportunities.</p>
+            <a className="primary-link" href="mailto:sdmishra1000@gmail.com">GET IN TOUCH <ArrowUpRight size={16} /></a>
           </div>
-          <div className="social-row">
-            <span>FIND ME AROUND THE WEB</span>
-            <div><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><Linkedin size={16} /> LINKEDIN <ArrowUpRight size={12} /></a><a href="https://github.com/000666whitedevil-ctrl" target="_blank" rel="noreferrer"><Github size={16} /> GITHUB <ArrowUpRight size={12} /></a><a href="mailto:hello@example.com"><Mail size={16} /> EMAIL <ArrowUpRight size={12} /></a></div>
+          <div className="social-links">
+            <a href="https://www.linkedin.com/in/shiv-dutt-mishra-8b5315372" target="_blank" rel="noreferrer">LINKEDIN <ArrowUpRight size={13} /></a>
+            <a href="https://github.com/000666whitedevil-ctrl" target="_blank" rel="noreferrer">GITHUB <ArrowUpRight size={13} /></a>
+            <a href="mailto:sdmishra1000@gmail.com">EMAIL <ArrowUpRight size={13} /></a>
           </div>
         </section>
       </main>
-
-      <footer className="site-footer section-wrap"><a className="wordmark" href="#top">SDM<span>®</span></a><span>MADE WITH CURIOSITY, IN NEW DELHI.</span><a href="#top">BACK TO TOP ↑</a><span>© 2026 SHIV DUTT MISHRA</span></footer>
+      <footer className="footer"><a className="wordmark" href="#top">S<span>M</span><i>.</i></a><span>AN OPEN-ENDED STORY · NEW DELHI, INDIA</span><span>© 2026 SHIV DUTT MISHRA</span></footer>
     </div>
   );
 }
